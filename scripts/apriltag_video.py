@@ -16,7 +16,7 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
     '''
     Detect AprilTags from video stream.
 
-    Args:   input_streams [list(int/str)]: Camera index or movie name to run detection algorithm on
+    Args:   input_streams [list(int/str)]: Camera index or movie name to run detection algorithm on, or use usb cam "/dev/videoX"
             output_stream [bool]: Boolean flag to save/not stream annotated with detections
             display_stream [bool]: Boolean flag to display/not stream annotated with detections
             detection_window_name [str]: Title of displayed (output) tag detection window
@@ -25,6 +25,9 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
     parser = ArgumentParser(description='Detect AprilTags from video stream.')
     apriltag.add_arguments(parser)
     options = parser.parse_args()
+    options.families = 'tag16h5'
+    print(options)
+
 
     '''
     Set up a reasonable search path for the apriltag DLL.
@@ -58,10 +61,18 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
             if not success:
                 break
 
+            # result, overlay = apriltag.detect_tags(frame,
+            #                                        detector,
+            #                                        camera_params=(3156.71852, 3129.52243, 359.097908, 239.736909),
+            #                                        tag_size=0.0762,
+            #                                        vizualization=3,
+            #                                        verbose=3,
+            #                                        annotation=True
+                                                #   )
             result, overlay = apriltag.detect_tags(frame,
                                                    detector,
-                                                   camera_params=(3156.71852, 3129.52243, 359.097908, 239.736909),
-                                                   tag_size=0.0762,
+                                                   camera_params=(244.65835587, 246.95681771, 330.28179004, 246.19044324),
+                                                   tag_size= 70,
                                                    vizualization=3,
                                                    verbose=3,
                                                    annotation=True
@@ -77,4 +88,4 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
 ################################################################################
 
 if __name__ == '__main__':
-    apriltag_video()
+    apriltag_video(input_streams=["/dev/video4"])
