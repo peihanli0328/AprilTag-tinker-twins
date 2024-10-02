@@ -25,7 +25,7 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
     parser = ArgumentParser(description='Detect AprilTags from video stream.')
     apriltag.add_arguments(parser)
     options = parser.parse_args()
-    options.families = 'tag16h5'
+    # options.families = 'tag16h5'
     print(options)
 
 
@@ -72,8 +72,8 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
             result, overlay = apriltag.detect_tags(frame,
                                                    detector,
                                                    camera_params=(244.65835587, 246.95681771, 330.28179004, 246.19044324),
-                                                   tag_size= 70,
-                                                   vizualization=3,
+                                                   tag_size= 200,
+                                                   vizualization=1,
                                                    verbose=3,
                                                    annotation=True
                                                   )
