@@ -25,7 +25,7 @@ def apriltag_video(input_streams=['../media/input/single_tag.mp4', '../media/inp
     parser = ArgumentParser(description='Detect AprilTags from video stream.')
     apriltag.add_arguments(parser)
     options = parser.parse_args()
-    # options.families = 'tag16h5'
+    options.families = 'tag16h5'
     print(options)
 
 
